@@ -1,9 +1,10 @@
 const database = require('../models');
+const Tasks = require('../models/tasks')
 
 class NotaController {
     static async pegaTodasAsNotas(req, res){
         try{
-            const todasAsNotas = await database.Notas.findAll();
+            const todasAsNotas = await database.Notas.findAll({include: 'Tasks'});
             return res.status(200).json(todasAsNotas);
         }catch (error) {
             return res.status(500).json(error.message);
@@ -25,13 +26,25 @@ class NotaController {
     }
 
     static async criaNota(req, res){
-        const novaNota = req.body
+        const novaNota = req.body;
+        //const { title, description, task } = req.body;
+        //const novaNota = {title, description};
+        //const tasks = task;
+        //console.log(tasks)
         try{
-            const novaNotaCriada = await database.Notas.create(novaNota);
+            // const novaNotaCriada = await database.Notas.create(novaNota);
+            // const nota_id = parseInt(novaNotaCriada.id)
+            // await tasks.forEach(infos => {
+            //     const novaTask = {...infos, nota_id}
+            //     database.Tasks.create(novaTask);
+            // });
+            // const novaNotaCriadaFinal = await database.Notas.findOne({include: 'Tasks'}, nota_id)
+            const novaNotaCriada = await database.Notas.create(novaNota, { include: [{ association: 'tasks' }] });
+            return res.status(201).json(novaNotaCriada);
 
-            return res.status(201).json(novaNotaCriada)
+            // return res.status(201).json(novaNotaCriadaFinal);
         }catch (error) {
-            return res.status(500).json(error.message)
+            return res.status(500).json(error.message);
         }
     }
 
