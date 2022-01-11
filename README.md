@@ -34,12 +34,16 @@
 
 ## :dart: Sobre ##
 
+API desenvolvida seguindo as orientações do [desafio]().
+Este projeto tem como finalidade contruir uma API para um bloco de notas com possibilidade de criar, editar, listar e deletar notas.
 
 ## :rocket: Tecnologias ##
 
-As seguintes ferramentas estão sendo utilizadas neste projeto:
+As seguintes ferramentas foram utilizadas neste projeto:
 
 - [Node.js](https://nodejs.org/en/)
+- [Sequelize](https://sequelize.org/v7/)
+- [Mysql](https://www.mysql.com/)
 
 ## :white_check_mark: Requisitos ##
 Antes de iniciar :checkered_flag:, você precisa ter o [Git](https://git-scm.com) e [Node](https://nodejs.org/en/) instalado.
@@ -52,12 +56,20 @@ $ git clone https://github.com/ViiniciusK9/node-api-tasks
 
 # Acesse
 $ cd node-api-tasks
+
+# Instale as dependências
+$ npm install
+
+# Inicie o servidor
+$ npm start
+
+# As configurações /config podem ser ajustadas para se adequar ao seu banco de dados
 ```
 
-## :arrows_clockwise: requisições 
----
+## :arrows_clockwise: Requisições 
+
 ### Criação de nota
-* Request - POST `http://localhost:3000/api/project`
+* **Request - POST** `http://localhost:3000/api/project`
 ```
 {
     "title": "Título da nota",
@@ -76,7 +88,7 @@ $ cd node-api-tasks
     ]
 }
 ```
-* Response
+* **Response**
     * Json com infomações cadastradas.
     * Http code 201 created.
 ```
@@ -111,18 +123,18 @@ $ cd node-api-tasks
 ---
 
 ### Listagem de todas as notas
-* Request - GET `http://localhost:3000/api/project`
+* **Request - GET** `http://localhost:3000/api/project`
 
-* Resposnse 
+* **Resposnse**
     * Todos os dados cadastrados no banco de dados.
     * Http code 200.
 ---
 
 ### Listagem de notas por ID
 
-* Request - GET `http://localhost:3000/api/project/:id`
+* **Request - GET** `http://localhost:3000/api/project/:id`
 
-* Response
+* **Response**
     * Http code 200.
     * Json com informações do id passado por parametro (exemplo 24 abaixo).
     * Caso id não exista, retorna status 404.
@@ -160,7 +172,7 @@ $ cd node-api-tasks
 
 ### Atualização de uma nota por ID
 
-* Request - PUT `http://localhost:3000/api/project/:id`
+* **Request - PUT** `http://localhost:3000/api/project/:id`
 
 ```
 {
@@ -183,7 +195,7 @@ $ cd node-api-tasks
 }
 ```
 
-* Response 
+* **Response**
     * Json com as informações atualizadas.
     * Http code 200.
     * Caso id não exista, retorna status 404.
@@ -221,14 +233,111 @@ $ cd node-api-tasks
 
 ### Deletar uma nota por ID
 
-* Request - DELETE `http://localhost:3000/api/project/:id`
+* **Request - DELETE** `http://localhost:3000/api/project/:id`
 
-* Response
+* **Response**
     * Http code 204, com Json vazio. 
     * Caso o ID não seja encontrado retorna Http code 404.
 ---
 
+### Criação de uma task
+* **Request - POST** `http://localhost:3000/api/project/:nota_id/tasks`
 
+```
+{
+    "title": "Título da task",
+    "taskRelevance": 10,
+    "completed": false
+}
+```
+
+* **Response**
+    * Http code 201 created.
+    * Json com informações cadastradas.
+
+```
+{
+    "id": 9,
+    "title": "Título da task",
+    "taskRelevance": 10,
+    "completed": false,
+    "nota_id": "24",
+    "updatedAt": "2022-01-11T14:15:37.803Z",
+    "createdAt": "2022-01-11T14:15:37.803Z"
+}
+```
+---
+
+### Listagem de todas as tasks
+
+* **Request - GET** `http://localhost:3000/api/tasks`
+
+* **Response**
+    * Todos os dados cadastrados no banco de dados.
+    * Http code 200.
+---
+
+### Litagem de task por ID
+
+* **Request - GET** `http://localhost:3000/api/tasks/:id`
+
+* **Response**
+    * Http code 200.
+    * Json com informações do ID passado por parametro (exemplo 9 abaixo).
+    * Caso id não exista, retorna status 404.
+
+```
+{
+    "id": 9,
+    "title": "Título da task",
+    "taskRelevance": 10,
+    "completed": false,
+    "createdAt": "2022-01-11T14:15:37.000Z",
+    "updatedAt": "2022-01-11T14:15:37.000Z",
+    "nota_id": 24
+}
+```
+---
+
+### Atualização de uma task por ID
+
+* **Request - PUT** `http://localhost:3000/api/tasks/:id`
+
+```
+{
+    "title": "Título da task atualizado",
+    "taskRelevance": 9,
+    "completed": true
+}
+```
+
+* **Response**
+    * Json com as informações atualizadas.
+    * Http code 200.
+    * Caso id não exista, retorna status 404.
+
+```
+{
+    "id": 9,
+    "title": "Título da task atualizado",
+    "taskRelevance": 9,
+    "completed": true,
+    "createdAt": "2022-01-11T14:15:37.000Z",
+    "updatedAt": "2022-01-11T14:23:09.000Z",
+    "nota_id": 24
+}
+```
+---
+
+### Deletar uma task por ID
+
+* **Request - DELETE** `http://localhost:3000/api/tasks/:id`
+
+* **Response**
+    * Http code 204, com Json vazio.
+    * Caso o ID não seja encontrado retorna Http code 404.
+
+---
 
 
 ## :memo: licença ##
