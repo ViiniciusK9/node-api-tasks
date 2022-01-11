@@ -18,7 +18,7 @@ class NotaController {
         try{
             const nota = await database.Notas.findByPk(id, {include: 'tasks'});
             if (!nota) {
-                return res.status(400).json({ error: 'Nota not found' });
+                return res.status(404).json({ error: 'Nota not found' });
             }
             return res.status(200).json(nota);
         }catch (error) {
@@ -60,7 +60,7 @@ class NotaController {
             });
 
             const notaAtualizada = await database.Notas.findByPk(id, {include: 'tasks'});
-            return res.status(201).json(notaAtualizada);
+            return res.status(200).json(notaAtualizada);
         }catch (error) {
             return res.status(500).json(error.message);
         }
