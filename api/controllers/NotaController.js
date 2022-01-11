@@ -39,19 +39,27 @@ class NotaController {
 
 
     static async atualizaNota(req, res){
-        const infoNota = req.body;
+        const { tasks, ...infoNota } = req.body;
         const { id } = req.params;
         try{
             const note = await database.Notas.findByPk(id);
             if (!note) {
                 return res.status(404).json({ error: 'Note not found' });
             }
-            await database.Notas.update(infoNota, {
+            await database.Notas.update(infoNota,{
                 where: {
                     id: parseInt(id)
                 }
             });
-            const notaAtualizada = await database.Notas.findByPk(id);
+            await tasks.forEach(info => {
+                database.Tasks.update(info, {
+                    where: {
+                        id: parseInt(info.id)
+                    }
+                })
+            });
+
+            const notaAtualizada = await database.Notas.findByPk(id, {include: 'tasks'});
             return res.status(201).json(notaAtualizada);
         }catch (error) {
             return res.status(500).json(error.message);

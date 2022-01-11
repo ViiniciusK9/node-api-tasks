@@ -11,7 +11,9 @@ module.exports = {
       nota_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Notas', Key: 'id' }
+        references: { model: 'Notas', Key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       title: {
         type: Sequelize.STRING
