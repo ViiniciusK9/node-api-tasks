@@ -34,7 +34,7 @@
 
 ## :dart: Sobre ##
 
-API desenvolvida seguindo as orientações do [desafio]().
+API desenvolvida seguindo as orientações do [desafio](https://github.com/ViiniciusK9/node-api-tasks/tree/main/desafio).
 Este projeto tem como finalidade contruir uma API para um bloco de notas com possibilidade de criar, editar, listar e deletar notas.
 
 ## :rocket: Tecnologias ##
