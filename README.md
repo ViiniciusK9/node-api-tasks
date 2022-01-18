@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img style="[-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://cdn-icons.flaticon.com/png/512/3131/premium/3131619.png?token=exp=1641901631~hmac=78e7573206523c394e8a6caa370973a5" height="300" width="300">
+  <img style="[-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://cdn-icons.flaticon.com/png/512/2043/premium/2043651.png?token=exp=1642538621~hmac=f5932c9785b900b8cc0feebc6ae2b1b1" height="300" width="300">
   
   &#xa0;
 
